@@ -3,7 +3,7 @@ import css from './App.module.css'
 import { useState } from "react";
 import nextId from "react-id-generator";
 import { Report } from 'notiflix/build/notiflix-report-aio';
-import { addContactToStore, deleteContact } from './redux/contactsSlice';
+import { addContactToStore } from './redux/contactsSlice';
 import { useSelector, useDispatch } from 'react-redux'
 
 export const ContactForm = ({ onFormSubmit }) => {
@@ -15,20 +15,10 @@ export const ContactForm = ({ onFormSubmit }) => {
     const dispatch = useDispatch();
 
     const handleNameChange = evt => {
-
         setName(evt.target.value);
     };
     const handleNumChange = evt => {
-
         setNumber(evt.target.value);
-    }
-
-    const handleOnSubmit = (e) => {
-        e.preventDefault();
-        onFormSubmit(e)
-
-        setName('');
-        setNumber('');
     }
 
     const addContact = (evt) => {
