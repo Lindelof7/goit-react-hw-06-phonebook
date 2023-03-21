@@ -1,10 +1,18 @@
 import PropTypes from 'prop-types'
 import css from './App.module.css'
 import { useState } from "react";
+import nextId from "react-id-generator";
+import { Report } from 'notiflix/build/notiflix-report-aio';
+import { addContactToStore, deleteContact } from './redux/contactsSlice';
+import { useSelector, useDispatch } from 'react-redux'
 
 export const ContactForm = ({ onFormSubmit }) => {
     const [Name, setName] = useState('');
     const [Number, setNumber] = useState('');
+
+    const contacts = useSelector((state) => state.contacts)
+    // const filter = useSelector((state) => state.filter.filter)
+    const dispatch = useDispatch();
 
     const handleNameChange = evt => {
         // this.setState({ name: evt.target.value });
@@ -23,8 +31,26 @@ export const ContactForm = ({ onFormSubmit }) => {
         setNumber('');
     }
 
+    const addContact = (evt) => {
+        evt.preventDefault();
+
+        const newContact = {
+            name: evt.target.elements.name.value,
+            id: nextId(),
+            number: evt.target.elements.number.value,
+        }
+
+        const findSame = contacts.find(contact => contact.name === evt.target.elements.name.value)
+
+        if (findSame) {
+            return Report.failure('You have already added this contact')
+        };
+
+        dispatch(addContactToStore(newContact))
+    }
+
     return (
-        <form onSubmit={handleOnSubmit} >
+        <form onSubmit={addContact} >
             <fieldset className={(css.formEl)}>
                 <label htmlFor="contactName" className={(css.formLabel)}>Name</label>
                 <input
