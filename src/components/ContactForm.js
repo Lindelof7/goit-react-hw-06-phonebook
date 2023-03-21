@@ -11,22 +11,22 @@ export const ContactForm = ({ onFormSubmit }) => {
     const [Number, setNumber] = useState('');
 
     const contacts = useSelector((state) => state.contacts)
-    // const filter = useSelector((state) => state.filter.filter)
+
     const dispatch = useDispatch();
 
     const handleNameChange = evt => {
-        // this.setState({ name: evt.target.value });
+
         setName(evt.target.value);
     };
     const handleNumChange = evt => {
-        // this.setState({ number: evt.target.value });
+
         setNumber(evt.target.value);
     }
 
     const handleOnSubmit = (e) => {
         e.preventDefault();
         onFormSubmit(e)
-        // this.setState({ name: '', number: '' })
+
         setName('');
         setNumber('');
     }
