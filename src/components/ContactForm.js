@@ -6,7 +6,7 @@ import { Report } from 'notiflix/build/notiflix-report-aio';
 import { addContactToStore } from './redux/contactsSlice';
 import { useSelector, useDispatch } from 'react-redux'
 
-export const ContactForm = ({ onFormSubmit }) => {
+export const ContactForm = () => {
     const [Name, setName] = useState('');
     const [Number, setNumber] = useState('');
 
